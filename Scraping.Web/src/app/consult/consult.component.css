@@ -1,0 +1,21 @@
+.backResults {
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 1px 1px 1em white;
+}
+
+.inputText{
+    max-height: 160px;
+    margin: 10px;
+    white-space: nowrap;
+    width: auto;
+}
+
+.customButton{
+    max-height: 160px;
+    margin: 10px;
+    white-space: nowrap;
+    width: auto;
+}

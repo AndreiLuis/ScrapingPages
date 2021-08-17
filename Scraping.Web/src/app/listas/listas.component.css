@@ -1,0 +1,49 @@
+.backResults {
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 1px 1px 1em white;
+}
+
+.item{
+    margin-right: 20px;
+}
+
+#images {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    max-height: 160px;
+    margin: 10px;
+    white-space: nowrap;
+    width: auto;
+}
+
+#palavras {
+    overflow-y: scroll;
+    margin: 10px;
+    max-height: 230px;
+}
+
+.meter { 
+    height: 5px;
+    position: relative;
+    background: #f3efe6;
+    overflow: hidden;
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+}
+
+.progress {
+    background-color: #e4c465;
+    animation: progressBar 3s ease-in-out;
+    animation-fill-mode:both; 
+}
+
+@keyframes progressBar {
+  0% { width: 0; }
+  100% { width: 100%; }
+}

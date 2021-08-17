@@ -1,0 +1,28 @@
+<div *ngIf="!words && !images" class="meter">
+    <span style="width:80%;"><span class="progress"></span></span>
+</div>
+<div *ngIf="words && images" class="backResults">
+    <div class="row">
+        <div id="images">
+            <div *ngFor="let image of images" class="ui small images vertical list">
+                <div class="item">
+                    <img class="ui avatar image" src="{{image.url}}">
+                </div>
+            </div>
+        </div>
+        <div id="palavras">
+            <!-- <div *ngFor="let palavra of palavras" class="ui inverted segment">
+                <div class="ui inverted relaxed divided list">
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">{{palavra.valor}}</div>
+                            {{palavra.quantidade}}
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div id="piechart"></div>
+        </div>
+    </div>
+    
+</div>
