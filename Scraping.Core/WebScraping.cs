@@ -84,32 +84,32 @@ namespace Scraping.Core
                 {
                     browser.Navigate().GoToUrl(_url);
                     var tags_p = browser.FindElementsByTagName("p");
-                    //var tags_h1 = browser.FindElementsByTagName("h1");
-                    //var tags_h2 = browser.FindElementsByTagName("h2");
-                    //var tags_h3 = browser.FindElementsByTagName("h3");
-                    //var tags_td = browser.FindElementsByTagName("td");
-                    //var tags_i = browser.FindElementsByTagName("i");
-                    //var tags_b = browser.FindElementsByTagName("b");
-                    //var tags_a = browser.FindElementsByTagName("a");
+                    var tags_h1 = browser.FindElementsByTagName("h1");
+                    var tags_h2 = browser.FindElementsByTagName("h2");
+                    var tags_h3 = browser.FindElementsByTagName("h3");
+                    var tags_td = browser.FindElementsByTagName("td");
+                    var tags_i = browser.FindElementsByTagName("i");
+                    var tags_b = browser.FindElementsByTagName("b");
+                    var tags_a = browser.FindElementsByTagName("a");
 
                     var result_p = GenerateStringList(tags_p);
-                    //var result_h1 = GenerateStringList(tags_h1);
-                    //var result_h2 = GenerateStringList(tags_h2);
-                    //var result_h3 = GenerateStringList(tags_h3);
-                    //var result_td = GenerateStringList(tags_td);
-                    //var result_i = GenerateStringList(tags_i);
-                    //var result_b = GenerateStringList(tags_b);
-                    //var result_a = GenerateStringList(tags_a);
+                    var result_h1 = GenerateStringList(tags_h1);
+                    var result_h2 = GenerateStringList(tags_h2);
+                    var result_h3 = GenerateStringList(tags_h3);
+                    var result_td = GenerateStringList(tags_td);
+                    var result_i = GenerateStringList(tags_i);
+                    var result_b = GenerateStringList(tags_b);
+                    var result_a = GenerateStringList(tags_a);
 
                     var result = new List<string>();
                     result.AddRange(result_p);
-                    //result.AddRange(result_h1);
-                    //result.AddRange(result_h2);
-                    //result.AddRange(result_h3);
-                    //result.AddRange(result_td);
-                    //result.AddRange(result_i);
-                    //result.AddRange(result_b);
-                    //result.AddRange(result_a);
+                    result.AddRange(result_h1);
+                    result.AddRange(result_h2);
+                    result.AddRange(result_h3);
+                    result.AddRange(result_td);
+                    result.AddRange(result_i);
+                    result.AddRange(result_b);
+                    result.AddRange(result_a);
                     return result;
                 }
                 return null;
