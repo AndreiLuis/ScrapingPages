@@ -12,7 +12,7 @@ import { ListasService } from './listas.service'
 })
 export class ListasComponent implements OnInit {
 
-  //show:any = undefined;
+  show:any = undefined;
   imagens:Imagem[] = [{
     Url: '',
   }];
@@ -32,6 +32,7 @@ export class ListasComponent implements OnInit {
   ngOnInit(): void {
       this.words = undefined;
       this.imagens = undefined;
+      this.show = this.validList();
   }
 
   validList(): boolean {
@@ -50,9 +51,8 @@ export class ListasComponent implements OnInit {
     var yValues = this.words.map(function (p: any) {
       return p.value;
     });
-    // this.canvas = document.getElementById('myChart');
-    // this.ctx = this.canvas.getContext('2d');
-    const chart = new Chart('myChart', {
+    var ctx = 'myChart';
+    var chart = new Chart(ctx, {
       type: "pie",
       data: {
         labels: yValues,
@@ -92,20 +92,17 @@ export class ListasComponent implements OnInit {
   }
 
   ConsultPage(page: Page) {
-    var img;
     this.listaService.Result(page).then(result =>(
       result.subscribe(a => {
         
-      // this.pieChartData = result.Words.map(function(x){
-      //   return x.Quantity;
-      // });
-      img = a.images;
+      this.imagens = a.images;
       this.words = a.words;
-      //this.drawChart();
+      this.show = this.validList();
+      if(0 < this.words.length)
+        this.drawChart();
       })
     ));
-    this.imagens = img;
-    //this.show = this.validList();
+    
   }
 
 }

@@ -19,10 +19,9 @@ export class ConsultComponent implements OnInit {
   ngOnInit(): void { }
 
   async SendToList(link:string): Promise<void>{
-    debugger;
     this.page.Link = link;
+    await this.router.navigate(["/list"]);
     await this.consultService.Result(this.page);
-    await this.router.navigate(["/list"])
   }
   
 }

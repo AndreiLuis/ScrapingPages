@@ -1,34 +1,21 @@
-<!-- <div *ngIf="show == false" class="showbox">
+<div *ngIf="show == false" class="showbox">
     <div class="loader">
       <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
       </svg>
     </div>
-</div> -->
+</div>
 <div class="backResults">
     <div class="ui two column very relaxed stackable grid">
+        <div id="palavras" class="middle aligned column">
+            <canvas id="myChart" style="width:100%;max-width:600px;max-height:700px;"></canvas>
+        </div>
         <div id="imagesId" class="column">
-            <div *ngFor="let imagem of imagens" class="ui small images horizontal list">
+            <div *ngFor="let imagem of imagens" class="ui small images list">
                 <div class="item">
                     <img class="ui avatar image" src="{{imagem.url}}">
-                    <div class="content">
-                    <div class="header">Avenida</div>
-                  </div>
                 </div>
             </div>
-        </div>
-        <div id="palavras" class="middle aligned column">
-            <!-- <div *ngFor="let palavra of palavras" class="ui inverted segment">
-                <div class="ui inverted relaxed divided list">
-                    <div class="item">
-                        <div class="content">
-                            <div class="header">{{palavra.valor}}</div>
-                            {{palavra.quantidade}}
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <canvas id="myChart" style="width:100%;max-width:600px;max-height:600px;"></canvas> -->
         </div>
     </div>
 </div>

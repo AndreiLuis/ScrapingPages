@@ -4,7 +4,7 @@ Projeto criado com o objetivo de fazer web scraping, de paginas informadas pelo 
 
 Imagem do projeto:
 
-![Aplicação em execução]()
+![Aplicação em execução](https://github.com/AndreiLuis/ScrapingPages/blob/main/Images/AppWorking.PNG)
 
 ### Front-End 
 - Angular 9

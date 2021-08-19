@@ -4,7 +4,7 @@ Project created with the objective of making web scraping, of pages informed by 
 
 Project image:
 
-![Running application]()
+![Running application](https://github.com/AndreiLuis/ScrapingPages/blob/main/Images/AppWorking.PNG)
 
 ### Front End
 - Angular 9
@@ -31,7 +31,7 @@ Install-Package Selenium.WebDriver
 dotnet add package Selenium.WebDriver
 ```
 Or use visual studio's Nuget Package visual feature:
-![Installation package](https://github.com/AndreiLuis/ScrapingPages/Images/PrintNugetPackage.png)
+![Installation package](https://github.com/AndreiLuis/ScrapingPages/blob/main/Images/PrintNugetPackage.PNG)
 
 
 ## Compile the projects
