@@ -38,7 +38,7 @@ Ou use o recuro visual Nuget Package do visual studio:
 
 No back-end, entre na pasta do projeto:
 ```powershell
-PS ...\QueryFiles\Scraping.Service>
+PS ...\ScrapingPages\Scraping.Service>
 ```
 E execute o comando:
 ```powershell
@@ -46,7 +46,7 @@ dotnet run
 ```
 No front-end, entre na pasta:
 ```powershell
-PS ...\QueryFiles\Scraping.Web>
+PS ...\ScrapingPages\Scraping.Web>
 ```
 Execute o comando:
 ```powershell
