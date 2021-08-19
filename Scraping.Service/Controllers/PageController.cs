@@ -24,9 +24,13 @@ namespace Scraping.Service.Controllers
                 PageEntity pageEntity = JsonSerializer.Deserialize<PageEntity>(json);
                 var images = new ImageService<ImageEntity>().Get(pageEntity.Link);
                 var words = wordService.Get(pageEntity.Link);
+                var topTenWords = (from work in words
+                                   orderby work.Quantity descending
+                                   select work).Take(10).ToList();
+
                 var totalWords = wordService.CalculateTotalWords(words);
 
-                var dataReturn = new DataReturnEntity(images, words, totalWords);
+                var dataReturn = new DataReturnEntity(images, topTenWords, totalWords);
 
                 if (dataReturn == null || (dataReturn.Images.Count <= 0 && dataReturn.Words.Count <= 0))
                     return NotFound(dataReturn);

@@ -1,9 +1,9 @@
 export interface SiteResult{
-    Words: [{
+    words: [{
         Value: string;
         Quantity: number;
     }]
-    Images:[{
+    images:[{
         Url: string;
     }]
 }

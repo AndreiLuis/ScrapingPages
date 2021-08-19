@@ -3,17 +3,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient} from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { SiteResult } from './listas.model';
-import { Page } from '../consult/consul.model';
+import { Page } from './consul.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ListasService {
+export class ConsultService {
+    Result$: Observable<any>;
+    private resultSubject = new Subject<any>();
+    baseUrl = "http://localhost:4200/";
 
-    baseUrl = "https://localhost:44323/Page";
-
-    constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
+    constructor(private snackBar: MatSnackBar, private http: HttpClient) {
+        this.Result$ = this.resultSubject.asObservable();
+     }
 
     showMessage(msg: string, isError: boolean = false): void {
         this.snackBar.open(msg, 'X', {
@@ -24,11 +27,8 @@ export class ListasService {
         });
     }
 
-    async Result(page: Page): Promise<Observable<SiteResult>> {
-        return  await this.http.post<SiteResult>(`${this.baseUrl}/Consult/`, page).pipe(
-            map(obj => obj),
-            catchError(e => this.errorHandler(e))
-        );
+    Result(page: Page) {
+        this.resultSubject.next(page);
     }
 
     errorHandler(e: any): Observable<any> {

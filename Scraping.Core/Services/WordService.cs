@@ -12,12 +12,15 @@ namespace Scraping.Core.Services
     {
         public List<T> Get(string url)
         {
-            var obj = new T();
             var ListWords = new List<T>();
             var type = typeof(T);
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             try
             {
+
+                var propertyQuantity = properties.FirstOrDefault(x => x.Name.ToLower() == "quantity");
+                var propertyValue = properties.FirstOrDefault(x => x.Name.ToLower() == "value");
+
                 var words = new WebScraping<T>(url).GetWords();
                 var result = (
                     from word in words
@@ -25,22 +28,23 @@ namespace Scraping.Core.Services
                     ).ToList();
                 foreach(var value in result)
                 {
-                    var propertyQuantity = properties.FirstOrDefault(x => x.Name.ToLower() == "quantity");
-                    var propertyValue = properties.FirstOrDefault(x => x.Name.ToLower() == "value");
-                    propertyQuantity.SetValue(obj, value.Count(), null);
-                    propertyValue.SetValue(obj, value.Key, null);
+                    var obj = new T();
+                    propertyQuantity.SetValue(obj, value.Key.Count());
+                    propertyValue.SetValue(obj, value.Key.ToString());
                     ListWords.Add(obj);
-                    words.Where(x => x == value.Key);
                 }
-                var listResult = (from work in ListWords
-                                  orderby work.GetType().GetProperty("quantity") descending
-                                  select work).Take(10);
-                return listResult.ToList();
+
+                return ListWords;
             }
             catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        private static List<T> CreateList<T>(params T[] elements)
+        {
+            return new List<T>(elements);
         }
 
         public int CalculateTotalWords(List<WordEntity> words)

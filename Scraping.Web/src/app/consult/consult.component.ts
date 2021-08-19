@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ConsultService} from './consulta.service'
 import { Page } from './consul.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consult',
@@ -8,14 +10,19 @@ import { Page } from './consul.model';
 })
 export class ConsultComponent implements OnInit {
 
-  urlParam:string = '';
-  page: Page ={
-    Link :'',
+  page:Page ={
+    Link: "",
   }
-
-  constructor() { }
+  link:string = '';
+  constructor(private consultService: ConsultService, private router: Router) { }
   
   ngOnInit(): void { }
 
+  async SendToList(link:string): Promise<void>{
+    debugger;
+    this.page.Link = link;
+    await this.consultService.Result(this.page);
+    await this.router.navigate(["/list"])
+  }
   
 }

@@ -12,11 +12,11 @@ namespace Scraping.Domain.Entities
         {
             Images = images;
             Words = words;
-            TotalWords = totalWords;
+            TotaltWords = totalWords;
         }
 
         public List<ImageEntity> Images { get; set; }
         public List<WordEntity> Words { get; set; }
-        public int TotalWords { get; set; }
+        public int TotaltWords { get; set; }
     }
 }

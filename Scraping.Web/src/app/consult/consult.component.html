@@ -1,12 +1,15 @@
 <!-- <p>consult works!</p> -->
 <div class="backComponent">
     <div id="inputText">
-        <div class="ui input">
-            <input ngModel="page.Link" type="text" placeholder="Please, insert the link here">
+        <div class="ui fluid icon input">
+            <input placeholder="Please, insert the link here"  
+                    type="text" 
+                    [(ngModel)]="link"
+                    name="Link">
         </div>
     </div>
     <div id="customButton">
-        <a class="ui basic button" routerLink="/list/{{ page }}">
+        <a (click)="SendToList(link)" class="ui basic button">
             <i class="icon search"></i>
             Consult page
         </a>

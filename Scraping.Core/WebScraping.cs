@@ -26,52 +26,102 @@ namespace Scraping.Core
 
         public List<T> GetImages()
         {
-
-            var ListImages = new List<T>();
-            var type = typeof(T);
-            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            if (_urlValidade != false)
+            var options = new ChromeOptions()
             {
-                var options = new ChromeOptions()
-                {
-                    BinaryLocation = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-                };
+                BinaryLocation = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+            };
 
-                options.AddArguments(new List<string>() { "headless", "disable-gpu" });
-                var browser = new ChromeDriver(options);
-                browser.Navigate().GoToUrl(_url);
-                var images = browser.FindElementsByTagName("img");
-                foreach (var url in images)
-                {
+            options.AddArguments(new List<string>() { "headless", "disable-gpu" });
+            var browser = new ChromeDriver(options);
 
-                    _object = new T();
-                    var property = properties.FirstOrDefault(x => x.Name.ToLower() == "url");
-                    property.SetValue(_object, url.GetAttribute("src"), null);
-                    ListImages.Add(_object);
+            try
+            {
+                var ListImages = new List<T>();
+                var type = typeof(T);
+                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                if (_urlValidade != false)
+                {                    
+                    browser.Navigate().GoToUrl(_url);
+                    var images = browser.FindElementsByTagName("img");
+                    foreach (var url in images)
+                    {
+                        _object = new T();
+                        var attribute = url.GetAttribute("src").ToString();
+                        if (!string.IsNullOrEmpty(attribute))
+                        {
+                            var property = properties.FirstOrDefault(x => x.Name.ToLower() == "url");
+                            property.SetValue(_object, attribute);
+                            ListImages.Add(_object);
+                        }
+                    }
+                    return ListImages;
                 }
-                return ListImages;
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                browser.Quit();
+            }
+            
         }
 
         public List<string> GetWords()
         {
-            if (_urlValidade != false)
+            var options = new ChromeOptions()
             {
-                var options = new ChromeOptions()
-                {
-                    BinaryLocation = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-                };
+                BinaryLocation = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            };
 
-                options.AddArguments(new List<string>() { "headless", "disable-gpu" });
-                var browser = new ChromeDriver(options);
-                browser.Navigate().GoToUrl(_url);
-                var allTags = browser.FindElementsByTagName("*");
-                var result = GenerateStringList(allTags);
-                //var words = tagP.Join(tagH1);
-                return result;
+            options.AddArguments(new List<string>() { "headless", "disable-gpu" });
+            var browser = new ChromeDriver(options);
+            try
+            {
+                if (_urlValidade != false)
+                {
+                    browser.Navigate().GoToUrl(_url);
+                    var tags_p = browser.FindElementsByTagName("p");
+                    //var tags_h1 = browser.FindElementsByTagName("h1");
+                    //var tags_h2 = browser.FindElementsByTagName("h2");
+                    //var tags_h3 = browser.FindElementsByTagName("h3");
+                    //var tags_td = browser.FindElementsByTagName("td");
+                    //var tags_i = browser.FindElementsByTagName("i");
+                    //var tags_b = browser.FindElementsByTagName("b");
+                    //var tags_a = browser.FindElementsByTagName("a");
+
+                    var result_p = GenerateStringList(tags_p);
+                    //var result_h1 = GenerateStringList(tags_h1);
+                    //var result_h2 = GenerateStringList(tags_h2);
+                    //var result_h3 = GenerateStringList(tags_h3);
+                    //var result_td = GenerateStringList(tags_td);
+                    //var result_i = GenerateStringList(tags_i);
+                    //var result_b = GenerateStringList(tags_b);
+                    //var result_a = GenerateStringList(tags_a);
+
+                    var result = new List<string>();
+                    result.AddRange(result_p);
+                    //result.AddRange(result_h1);
+                    //result.AddRange(result_h2);
+                    //result.AddRange(result_h3);
+                    //result.AddRange(result_td);
+                    //result.AddRange(result_i);
+                    //result.AddRange(result_b);
+                    //result.AddRange(result_a);
+                    return result;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                browser.Quit();
+            }
         }
 
         public List<string> GenerateStringList(ReadOnlyCollection<IWebElement> elements)
@@ -79,7 +129,12 @@ namespace Scraping.Core
             List<string> result = new List<string>();
             foreach (var value in elements)
             {
-                result.Add(value.Text);
+                var values = value.Text.Split();
+                foreach (var item in values)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                        result.Add(Regex.Replace(item, "[^a-zA-Z]+", ""));
+                }
             }
             return result;
         }

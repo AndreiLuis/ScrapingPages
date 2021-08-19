@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Scraping.Domain.Entities
 {
-    public struct ImageEntity
+    public class ImageEntity
     {
         public string Url { get; set; }
     }

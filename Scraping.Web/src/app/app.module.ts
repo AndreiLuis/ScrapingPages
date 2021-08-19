@@ -5,6 +5,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { FormsModule }   from '@angular/forms';
 
 import { ListasComponent } from './listas/listas.component';
 import { ListasService } from './listas/listas.service';
@@ -17,6 +18,7 @@ import { ConsultComponent } from './consult/consult.component';
     ConsultComponent
   ],
   imports: [
+    FormsModule,
     MatSnackBarModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,8 +26,9 @@ import { ConsultComponent } from './consult/consult.component';
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'consult' },
       { path: 'consult', component: ConsultComponent, data: {animation: 'ConsultPage'} },
-      { path: 'list/:url', component: ListasComponent, data: {animation: 'ListasPage'} },
-  ])],
+      { path: 'list', component: ListasComponent, data: {animation: 'ListasPage'} },
+    ])
+],
   providers: [
     {
       provide: LOCALE_ID,
